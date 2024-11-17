@@ -2,11 +2,13 @@ namespace TaskManagement.Api.Dtos.TaskDtos;
 
 public record class TaskDetailsDto
 (
-    int Id,
+ int Id,
     string Title,
-    string? Description,
-    string Status, // Pending, In Progress, Completed
-    string Priority, // Low, Medium, High
+    string Description,
+    bool IsCompleted,
+    string Priority,
     DateOnly DueDate,
-    string CategoryName
+    int UserId,
+    int CategoryId,
+    string Status
 );

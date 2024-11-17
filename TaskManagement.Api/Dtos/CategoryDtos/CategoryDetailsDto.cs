@@ -1,9 +1,12 @@
+using TaskManagement.Api.Dtos.TaskDtos;
+
 namespace TaskManagement.Api.Dtos.CategoryDtos;
 
 public record class CategoryDetailsDto
 (
-    int Id,
+     int Id,
     string Name,
     string? Description,
-    int TaskCount // عدد المهام المرتبطة بهذه الفئة
+    int TaskCount
+    
 );

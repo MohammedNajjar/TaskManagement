@@ -4,6 +4,12 @@ public record class TaskSummaryDto
 (
     int Id,
     string Title,
+    string Description,
+    bool IsCompleted,
     string Priority,
-    DateTime DueDate
+    DateOnly DueDate,
+    string User,
+    string Category,
+    string Status
+
 );

@@ -4,7 +4,8 @@ namespace TaskManagement.Api.Dtos.UserDtos;
 
 public record class UserProfileDto
 (
-   int Id,
-   string UserName
+  int Id,
+  string UserName
+  
 
 );

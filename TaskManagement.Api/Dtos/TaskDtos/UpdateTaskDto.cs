@@ -7,11 +7,12 @@ public record class UpdateTaskDto
 
 [Required][StringLength(100)] String Title,
 [Required][StringLength(100)] String Description,
-
 [Required] DateOnly DueDate,
-[Range(1, 3)] int Priority,
+ [Range(1,3)]String Priority,
+ bool IsCompleted,
 int UserId,
-int CategoryId
+int CategoryId,
+string Status
 
 
 );
