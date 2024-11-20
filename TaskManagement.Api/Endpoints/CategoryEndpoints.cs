@@ -42,12 +42,13 @@ public static class CategoryEndpoints
         //Get /categories/{id}
 
         group.MapGet("/{id}", async (int id, TaskManagementContext dbcontext) =>
-           { var category = await dbcontext.Categories.FindAsync(id);
-        return category is null ? Results.NotFound() :
-          Results.Ok(category.ToCategoryDetails());
+           {
+               var category = await dbcontext.Categories.FindAsync(id);
+               return category is null ? Results.NotFound() :
+                 Results.Ok(category.ToCategoryDetails());
 
 
-    }).WithName(getCategoryEndpointName);
+           }).WithName(getCategoryEndpointName);
 
 
         //PUT /categories/{id}
