@@ -6,7 +6,7 @@ public record class TaskDetailsDto
     string Title,
     string Description,
     bool IsCompleted,
-    string Priority,
+    int Priority,
     DateOnly DueDate,
     int UserId,
     int CategoryId,

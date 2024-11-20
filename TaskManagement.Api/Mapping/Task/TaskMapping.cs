@@ -22,7 +22,7 @@ public static class TaskMapping
         };
     }
 
-    public static Entities.Task ToEntity(this UpdateTaskDto updateTask, int id)
+    public static Entities.Task ToTaskEntity(this UpdateTaskDto updateTask, int id)
     {
 
         return new Entities.Task()
@@ -48,7 +48,7 @@ public static class TaskMapping
             task.Title,               
             task.Description,         
             task.IsCompleted,         
-            task.Priority ?? "Low",   
+            task.Priority ,   
             task.DueDate,             
             task.User!.UserName,              
             task.Category!.Name,          
@@ -63,7 +63,7 @@ public static class TaskMapping
             task.Title,               
             task.Description,         
             task.IsCompleted,         
-            task.Priority ?? "Low",   
+            task.Priority ,   
             task.DueDate,             
             task.UserId,            
             task.CategoryId,          

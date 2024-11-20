@@ -1,0 +1,26 @@
+# Get all categories
+GET http://localhost:5273/categories
+
+# Get a specific category by ID
+GET http://localhost:5273/categories/1
+
+# Create a new category
+POST http://localhost:5273/categories
+Content-Type: application/json
+
+{
+     "name": "Work",
+     "description": "Tasks related to work"
+}
+
+# Update a category
+PUT http://localhost:5273/categories/1
+Content-Type: application/json
+
+{
+    "name": "Personal",
+    "description": "Tasks related to personal life"
+}
+
+# Delete a category by ID
+DELETE http://localhost:5273/categories/2

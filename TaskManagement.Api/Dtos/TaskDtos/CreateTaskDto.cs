@@ -9,7 +9,7 @@ public record class CreateTaskDto
 [Required][StringLength(100)] String Description,
 [Required] DateOnly DueDate,
 bool IsCompleted,
-[Range(1, 3)] String Priority,
+[Range(1, 3)] int Priority,
 int UserId,
 int CategoryId,
 string Status

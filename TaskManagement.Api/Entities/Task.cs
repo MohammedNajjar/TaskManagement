@@ -10,7 +10,7 @@ public class Task
     public required string Description { get; set; }
     public DateOnly DueDate { get; set; }
     public bool IsCompleted { get; set; }
-    public String? Priority { get; set; }
+    public int Priority { get; set; }
     public int UserId { get; set; }
     public User? User { get; set; }
     public int CategoryId { get; set; }

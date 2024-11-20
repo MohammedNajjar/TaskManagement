@@ -17,7 +17,7 @@ public static class UserMapping
         };
 
     }
-    public static UserProfileDto ToEntity(this Entities.User user)
+    public static UserProfileDto ToUserProfileDto(this Entities.User user)
     {
         return new(
 
@@ -25,5 +25,6 @@ public static class UserMapping
             user.UserName);
         
     }
+    
 
 }

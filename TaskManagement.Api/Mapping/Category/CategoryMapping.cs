@@ -12,7 +12,7 @@ public static class CategoryMapping
         {
             Name = createCategory.Name,
             Description = createCategory.Description,
-            UserId= createCategory.UserId
+            
         };
     }
     public static Entities.Category ToEntity(this UpdateCategoryDto updateCategory, int id)
