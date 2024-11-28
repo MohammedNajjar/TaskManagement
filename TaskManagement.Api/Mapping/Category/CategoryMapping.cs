@@ -12,7 +12,8 @@ public static class CategoryMapping
         {
             Name = createCategory.Name,
             Description = createCategory.Description,
-            
+            UserId = createCategory.UserId
+
         };
     }
     public static Entities.Category ToEntity(this UpdateCategoryDto updateCategory, int id)
@@ -22,7 +23,8 @@ public static class CategoryMapping
         {
             Id = id,
             Name = updateCategory.Name,
-            Description = updateCategory.Description
+            Description = updateCategory.Description,
+            UserId = updateCategory.UserId ?? 0
 
         };
     }
@@ -32,7 +34,7 @@ public static class CategoryMapping
             category.Id,
             category.Name,
             category.Description,
-         category.Tasks?.Count ?? 0 
+         category.Tasks?.Count ?? 0
 
 
         );

@@ -1,37 +1,41 @@
-### Task Management
-
-# Create a new task
-POST http://localhost:5273/tasks
-Content-Type: application/json
-
-{
-  "title": "مهمة جديدة",
-    "description": "وصف المهمة",
-    "dueDate": "2024-12-31",
-    "priority": 2,
-    "userId": 1,
-    "categoryId": 1,
-    "status": "Pending"
-}
-
-# Get a task by ID
-GET http://localhost:5273/tasks/1
-
-
-# Update an existing task
-PUT http://localhost:5000/api/tasks/2
-Content-Type: application/json
-
-{
-    "title": "Updated Task Title",
-    "description": "Updated description",
-    "dueDate": "2024-12-15",
-    "status": "Completed",
+### 
+curl -X POST http://localhost:5273/tasks \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
+ -d '{  
+    "title": "Sample Task",
+    "description": "This is a sample task description.",
+    "dueDate": "2024-11-30T00:00:00", 
+    "isCompleted": true,
+    "priority": 1,
+    "userId": 2,
     "categoryId": 2,
-    "priority": "Medium"
-}
+    "status": "Pending"
+}'
 
-# Delete a task
-DELETE http://localhost:5000/api/tasks/2
+### 
+curl -X GET http://localhost:5273/c \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
 
+### 
+curl -X GET http://localhost:5273/tasks/1 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
 
+###
+curl -X PUT http://localhost:5273/tasks/1 \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
+-d '{
+    "title": "najjat",
+    "description": "This is a sample task description.",
+    "dueDate": "2024-11-30T00:00:00", 
+    "isCompleted": true,
+    "priority": 2,
+    "userId": 2,
+    "categoryId": 2,
+    "status": "Pending"
+}'
+
+###
+curl -X DELETE http://localhost:5273/tasks/2 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \

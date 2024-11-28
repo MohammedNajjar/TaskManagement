@@ -4,14 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TaskManagement.Api.Data;
 
 #nullable disable
 
 namespace TaskManagement.Api.Data.Migrations
 {
     [DbContext(typeof(TaskManagementContext))]
-    [Migration("20241119204831_InitialCreate")]
+    [Migration("20241127180720_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,7 +33,12 @@ namespace TaskManagement.Api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Categories");
 
@@ -43,31 +47,15 @@ namespace TaskManagement.Api.Data.Migrations
                         {
                             Id = 1,
                             Description = "Work related tasks",
-                            Name = "Work"
+                            Name = "Work",
+                            UserId = 1
                         },
                         new
                         {
                             Id = 2,
                             Description = "Personal tasks",
-                            Name = "Personal"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Shopping list",
-                            Name = "Shopping"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Health and fitness",
-                            Name = "Health"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Educational tasks",
-                            Name = "Study"
+                            Name = "Personal",
+                            UserId = 1
                         });
                 });
 
@@ -84,7 +72,7 @@ namespace TaskManagement.Api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("DueDate")
+                    b.Property<DateTime>("DueDate")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsCompleted")
@@ -128,6 +116,25 @@ namespace TaskManagement.Api.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "hashedpassword",
+                            UserName = "admin"
+                        });
+                });
+
+            modelBuilder.Entity("TaskManagement.Api.Entities.Category", b =>
+                {
+                    b.HasOne("TaskManagement.Api.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TaskManagement.Api.Entities.Task", b =>
