@@ -2,30 +2,21 @@ POST http://localhost:5273/users/register
 Content-Type: application/json
 
 {
-  "UserName": "exampleUser",
-  "Password": "examplePassword"
+   "UserName": "mohammed najjar",
+  "Password": "password123"
 }
 
-
-GET https://localhost:5001/api/users/{id}
-
-# Create a new user
-
-POST https://localhost:5001/api/users
+###
+POST http://localhost:5273/users/login 
 Content-Type: application/json
 
 {
-  "sampleKey": "sampleValue"
+  "UserName": "mohammed najjar",
+  "Password": "password123"
 }
 
-# Update a user by ID
-PUT https://localhost:5001/api/users/{id}
-Content-Type: application/json
+###
+GET http://localhost:5273/users/1
 
-{
-  "sampleKey": "sampleValue"
-}
 
-# Delete a user by ID
-DELETE https://localhost:5001/api/users/{id}
 

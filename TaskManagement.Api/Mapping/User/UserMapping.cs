@@ -23,8 +23,8 @@ public static class UserMapping
 
             user.Id,
             user.UserName);
-        
+
     }
-    
+
 
 }

@@ -1,13 +1,15 @@
+using Microsoft.VisualBasic;
+
 namespace TaskManagement.Api.Dtos.TaskDtos;
 
 public record class TaskDetailsDto
 (
- int Id,
+    int Id,
     string Title,
     string Description,
     bool IsCompleted,
     int Priority,
-    DateOnly DueDate,
+    DateTime DueDate,
     int UserId,
     int CategoryId,
     string Status

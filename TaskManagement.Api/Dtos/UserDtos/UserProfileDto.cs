@@ -6,6 +6,6 @@ public record class UserProfileDto
 (
   int Id,
   string UserName
-  
+
 
 );

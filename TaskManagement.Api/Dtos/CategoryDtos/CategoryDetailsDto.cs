@@ -8,5 +8,5 @@ public record class CategoryDetailsDto
     string Name,
     string? Description,
     int TaskCount
-    
+
 );

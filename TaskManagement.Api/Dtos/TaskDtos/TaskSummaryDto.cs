@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace TaskManagement.Api.Dtos.TaskDtos;
 
 public record class TaskSummaryDto
@@ -7,7 +9,7 @@ public record class TaskSummaryDto
     string Description,
     bool IsCompleted,
     int Priority,
-    DateOnly DueDate,
+    DateTime DueDate,
     string User,
     string Category,
     string Status
