@@ -1,7 +1,7 @@
 GET http://localhost:5273/categories
 
 ###
-GET http://localhost:5273/categories/25
+GET http://localhost:5273/categories/20
 
 ###
 POST http://localhost:5273/categories
@@ -10,7 +10,7 @@ Content-Type: application/json
 {
     "name": "Work",
     "description": "Tasks related to work",
-    "userId": 1
+    "userId": 5
 
 }
 
@@ -20,7 +20,8 @@ Content-Type: application/json
 
 {
     "name": "asded",
-    "description": "najjar relateghfghfhg to personal life"
+    "description": "najjar relateghfghfhg to personal life",
+    "userId":5
    
    
 }

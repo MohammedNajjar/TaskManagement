@@ -1,8 +1,9 @@
 using System;
+using Mapster;
 using Microsoft.VisualBasic;
 
 namespace TaskManagement.Api.Entities;
-
+[AdaptTo("[name]Dto"), GenerateMapper]
 public class Task
 {
 

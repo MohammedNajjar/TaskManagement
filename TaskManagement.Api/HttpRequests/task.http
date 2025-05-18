@@ -1,41 +1,41 @@
 ### 
 curl -X POST http://localhost:5273/tasks \
 -H "Content-Type: application/json" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzM0ODYyMTcxLCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.6_vF5Y7W9dESaZdLXXclzchxif45_-yLaS58GM_uPo0" \
  -d '{  
     "title": "Sample Task",
     "description": "This is a sample task description.",
     "dueDate": "2024-11-30T00:00:00", 
     "isCompleted": true,
     "priority": 1,
-    "userId": 2,
-    "categoryId": 2,
+    "userId": 4,
+    "categoryId": 4,
     "status": "Pending"
 }'
 
 ### 
-curl -X GET http://localhost:5273/c \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
+curl -X GET http://localhost:5273/tasks \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzM0OTAyNjA0LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.3nWReybPayBOYO3Llzna9i1m0xuJ5X23A4WdMvsU5RE" \
 
 ### 
 curl -X GET http://localhost:5273/tasks/1 \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzM0OTAyNjA0LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.3nWReybPayBOYO3Llzna9i1m0xuJ5X23A4WdMvsU5RE" \
 
 ###
 curl -X PUT http://localhost:5273/tasks/1 \
 -H "Content-Type: application/json" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzM0OTAyNjA0LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.3nWReybPayBOYO3Llzna9i1m0xuJ5X23A4WdMvsU5RE" \
 -d '{
-    "title": "najjat",
+    "title": "najjat225255",
     "description": "This is a sample task description.",
     "dueDate": "2024-11-30T00:00:00", 
     "isCompleted": true,
     "priority": 2,
-    "userId": 2,
+    "userId": 5,
     "categoryId": 2,
     "status": "Pending"
 }'
 
 ###
-curl -X DELETE http://localhost:5273/tasks/2 \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzMyNzMyMDI3LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.U41m2sGnkbEtGZoCUT4pbr4q96fYA8mCTQk_62HzqMc" \
+curl -X DELETE http://localhost:5273/tasks/5 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibW9oYW1tZWQgbmFqamFyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyIiwiZXhwIjoxNzM0OTAyNjA0LCJpc3MiOiJUYXNrTWFuYWdlbWVudC5BcGkiLCJhdWQiOiJUYXNrTWFuYWdlbWVudEFwcFVzZXJzIn0.3nWReybPayBOYO3Llzna9i1m0xuJ5X23A4WdMvsU5RE" \

@@ -1,9 +1,10 @@
 using System;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Api.Data;
 using TaskManagement.Api.Dtos.CategoryDtos;
 using TaskManagement.Api.Entities;
-using TaskManagement.Api.Mapping.Category;
+
 
 
 namespace TaskManagement.Api.Endpoints;
@@ -23,10 +24,12 @@ public static class CategoryEndpoints
             {
                 return Results.NotFound(new { message = "User not found" });
             }
-            Category category = creatCategory.ToEntitiy();
+            Category category = creatCategory.Adapt<Category>();
             dbcontext.Add(category);
             await dbcontext.SaveChangesAsync();
-            return Results.CreatedAtRoute(getCategoryEndpointName, new { id = category.Id }, category.ToCategoryDetails());
+            var categoryDetails = category.Adapt<CategoryDetailsDto>();
+            return Results.CreatedAtRoute(getCategoryEndpointName, new { id = category.Id }, categoryDetails);
+
 
         }
         );
@@ -36,7 +39,7 @@ public static class CategoryEndpoints
         group.MapGet("/", async (TaskManagementContext dbcontext) =>
         await dbcontext.Categories.
         Include(category => category.Tasks).
-        Select(category => category.ToCategorySummary()).
+        ProjectToType<CategorySummaryDto>().
         AsNoTracking().
         ToListAsync());
 
@@ -48,7 +51,7 @@ public static class CategoryEndpoints
                 .Include(category => category.Tasks)
                 .FirstOrDefaultAsync(c => c.Id == id);
                return category is null ? Results.NotFound(new { message = "Category not found" }) :
-                 Results.Ok(category.ToCategoryDetails());
+                 Results.Ok(category.Adapt<CategoryDetailsDto>());
 
 
            }).WithName(getCategoryEndpointName);
@@ -74,8 +77,9 @@ public static class CategoryEndpoints
            return Results.BadRequest(new { message = "User not found" });
        }
 
-       dpContext.Entry(existingCategory).CurrentValues.SetValues(updateCategory.ToEntity(id));
+       updateCategory.Adapt(existingCategory);
        await dpContext.SaveChangesAsync();
+
 
        return Results.NoContent();
    });

@@ -1,10 +1,11 @@
 using System;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Api.Data;
 using TaskManagement.Api.Dtos.TaskDtos;
 using TaskManagement.Api.Entities;
-using TaskManagement.Api.Mapping.Task;
+
 
 
 
@@ -22,40 +23,44 @@ public static class TaskEndpoints
 
         group.MapPost("", async (CreateTaskDto creatTask, TaskManagementContext dbcontext) =>
         {
-            Entities.Task task = creatTask.ToEntity(dbcontext);
+            var task = creatTask.Adapt<Entities.Task>();
             dbcontext.Add(task);
             await dbcontext.SaveChangesAsync();
-            return Results.CreatedAtRoute(getTaskEndpointName, new { id = task.Id }, task.ToDetailsDto());
+            var taskDetails = task.Adapt<TaskDetailsDto>();
+            return Results.CreatedAtRoute(getTaskEndpointName, new { id = task.Id }, taskDetails);
         });
 
-        // GET / tasks
+        // GET /tasks
         group.MapGet("/", async (TaskManagementContext dbContext, string? status, string? category, int? priority) =>
-   {
-       IQueryable<Entities.Task> query = dbContext.Tasks;
+        {
+            IQueryable<Entities.Task> query = dbContext.Tasks;
 
-       //  خيارات التصفية
-       if (!string.IsNullOrEmpty(status))
-           query = query.Where(task => task.Status != null && task.Status.ToLower() == status.ToLower());
+            // Apply filters
+            if (!string.IsNullOrEmpty(status))
+                query = query.Where(task => task.Status != null && task.Status.ToLower() == status.ToLower());
 
-       if (!string.IsNullOrEmpty(category))
-           query = query.Where(task => task.Category != null && task.Category.Name.ToLower() == category.ToLower());
+            if (!string.IsNullOrEmpty(category))
+                query = query.Where(task => task.Category != null && task.Category.Name.ToLower() == category.ToLower());
 
-       if (priority.HasValue)
-           query = query.Where(task => task.Priority == priority);
+            if (priority.HasValue)
+                query = query.Where(task => task.Priority == priority);
 
-       var tasks = await query.Include(task => task.Category).Include(task => task.User)
-                               .OrderBy(task => task.DueDate)
-                               .Select(task => task.ToSummaryDto())
-                               .AsNoTracking()
-                               .ToListAsync();
+            // Fetch data and use Adapt explicitly
+            var taskEntities = await query.Include(task => task.Category)
+                                           .Include(task => task.User)
+                                           .OrderBy(task => task.DueDate)
+                                           .AsNoTracking()
+                                           .ToListAsync();
 
-       if (!tasks.Any()) // إذا كانت القائمة فارغة
-       {
-           return Results.Ok(new { message = "No tasks found. Create a task to get started." });
-       }
+            var tasks = taskEntities.Adapt<List<TaskSummaryDto>>();
 
-       return Results.Ok(tasks);
-   });
+            if (!tasks.Any()) // Handle empty result
+            {
+                return Results.Ok(new { message = "No tasks found. Create a task to get started." });
+            }
+
+            return Results.Ok(tasks);
+        });
 
         // GET / tasks / id
 
@@ -66,7 +71,7 @@ public static class TaskEndpoints
             .Include(t => t.User)
             .FirstOrDefaultAsync(t => t.Id == id);
 
-            return task is null ? Results.NotFound(new { message = "Task not found" }) : Results.Ok(task.ToDetailsDto());
+            return task is null ? Results.NotFound(new { message = "Task not found" }) : Results.Ok(task.Adapt<TaskDetailsDto>());
         }
 
         ).WithName(getTaskEndpointName);
@@ -80,8 +85,8 @@ public static class TaskEndpoints
             {
                 return Results.NotFound(new { message = "Task not found" });
             }
-            dpContext.Entry(existingTask).CurrentValues.
-            SetValues(updateTask.ToTaskEntity(id, dpContext));
+                       updateTask.Adapt(existingTask);
+
             await dpContext.SaveChangesAsync();
 
             return Results.NoContent();

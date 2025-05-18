@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using Mapster;
 using Microsoft.VisualBasic;
 
 namespace TaskManagement.Api.Dtos.TaskDtos;
-
+[GenerateMapper]
 public record class CreateTaskDto
 (
 

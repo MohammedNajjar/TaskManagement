@@ -1,8 +1,10 @@
 using System;
+using Mapster;
 
 namespace TaskManagement.Api.Entities;
-
+[AdaptTo("[name]Dto"), GenerateMapper]
 public class Category
+
 {
     public int Id { get; set; }
     public required string Name { get; set; }

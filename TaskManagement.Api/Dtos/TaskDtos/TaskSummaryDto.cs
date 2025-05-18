@@ -10,8 +10,8 @@ public record class TaskSummaryDto
     bool IsCompleted,
     int Priority,
     DateTime DueDate,
-    string User,
-    string Category,
+    string?User,
+    string? Category,
     string Status
 
 );

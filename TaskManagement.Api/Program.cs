@@ -4,12 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Mapster;
+using MapsterMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Database Configuration
 var connString = builder.Configuration.GetConnectionString("TaskManagement");
 builder.Services.AddSqlite<TaskManagementContext>(connString);
 
+// JWT Configuration
 var secretKey = builder.Configuration["Jwt:Secret"];
 if (string.IsNullOrEmpty(secretKey))
 {
@@ -38,8 +42,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddAuthorization();
+// Mapster Configuration
+var config = TypeAdapterConfig.GlobalSettings;
+config.Scan(typeof(Program).Assembly);
+builder.Services.AddSingleton(config); // Register TypeAdapterConfig
+builder.Services.AddScoped<IMapper, ServiceMapper>(); // Register ServiceMapper
 
+
+// Additional Services
+builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -47,11 +58,15 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Map Endpoints
 app.MapCategoryEndpoint();
 app.MapUserEndpoints();
 app.MapTaskEndpoint();
 app.MapControllers();
 
-await app.MigrateDbAsync();
+// Apply Database Migrations
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetRequiredService<TaskManagementContext>();
+await dbContext.Database.MigrateAsync();
 
 app.Run();

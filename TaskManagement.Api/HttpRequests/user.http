@@ -2,7 +2,7 @@ POST http://localhost:5273/users/register
 Content-Type: application/json
 
 {
-   "UserName": "mohammed najjar",
+   "UserName": "mohammed2",
   "Password": "password123"
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5273/users/1
+GET http://localhost:5273/users/5
 
 
 

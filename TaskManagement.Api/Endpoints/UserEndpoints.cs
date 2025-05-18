@@ -1,9 +1,10 @@
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Api.Data;
 using TaskManagement.Api.Dtos.UserDtos;
 using TaskManagement.Api.Entities;
-using TaskManagement.Api.Mapping.User;
+
 
 namespace TaskManagement.Api.Endpoints
 {
@@ -19,7 +20,7 @@ namespace TaskManagement.Api.Endpoints
             group.MapPost("/register", async (UserRegisterDto userRegister, TaskManagementContext dbContext) =>
             {
                 // تحويل DTO إلى كائن مستخدم
-                User user = userRegister.ToEntity();
+                User user = userRegister.Adapt<User>();
                 var passwordHasher = new PasswordHasher<User>();
                 user.Password = passwordHasher.HashPassword(user, userRegister.Password);
 
@@ -30,7 +31,8 @@ namespace TaskManagement.Api.Endpoints
 
                 dbContext.Users.Add(user);
                 await dbContext.SaveChangesAsync();
-                return Results.CreatedAtRoute(getUserEndpointName, new { id = user.Id }, user.ToUserProfileDto());
+                var userProfile = user.Adapt<UserProfileDto>();
+                return Results.CreatedAtRoute(getUserEndpointName, new { id = user.Id }, userProfile);
             });
 
             // Get User/{id}
@@ -41,7 +43,8 @@ namespace TaskManagement.Api.Endpoints
                 {
                     return Results.NotFound();
                 }
-                return Results.Ok(user.ToUserProfileDto());
+                var userProfile = user.Adapt<UserProfileDto>();
+                return Results.Ok(userProfile);
             }).WithName(getUserEndpointName);
 
             // creat post login
